@@ -47,6 +47,7 @@
     </div>
     <script>
         document.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault()
             const values = []
             for (child of event.target.firstElementChild.children) {
                 values.push(child.firstElementChild.value)
@@ -63,6 +64,7 @@
         });
 
         document.getElementById('healthUp').addEventListener('click', (event) => {
+            event.preventDefault();
             let health = parseInt(document.getElementById('health').textContent)
             health++
             document.getElementById('health').textContent = health.toString()
