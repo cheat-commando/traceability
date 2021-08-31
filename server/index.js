@@ -38,17 +38,20 @@ function makeNewEntry(req, res) {
     const newEntry = {
         id: currentId,favClass, favGame, favColor
     }
+    let isThereNull = false
     for (piece in newEntry) {
         if (newEntry[piece] === 'none') {
-            console.log(piece)
+            isThereNull = true
             rollbar.error('User left a field blank')
             res.status(406)
             break
         } 
-    } 
-    peoplesInterest.push(newEntry)
-    rollbar.info('User successfully entered their favorites', {favClass, favGame, favColor})
-    res.status(200).send(newEntry)
+    }
+    if (!isThereNull) {
+        peoplesInterest.push(newEntry)
+        rollbar.info('User successfully entered their favorites', {favClass, favGame, favColor})
+        res.status(200).send(newEntry)
+    }
 }
 
 app.post('/newInfo', (req, res) => {
