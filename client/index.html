@@ -50,13 +50,14 @@
             event.preventDefault()
             const values = []
             for (child of event.target.firstElementChild.children) {
-                values.push(child.firstElementChild.value)
+                values.push(child.firstElementChild.options[child.firstElementChild.selectedIndex].value)
             }
             const newPersonsInterests = {
                 favClass: values[0],
                 favGame: values[1],
                 favColor: values[2]
             }
+            console.log(newPersonsInterests)
             axios.post('/newInfo', newPersonsInterests)
                 .then(res => {
                     //stuff
@@ -68,7 +69,8 @@
             let health = parseInt(document.getElementById('health').textContent)
             health++
             document.getElementById('health').textContent = health.toString()
-            axios.get(`/healthCheck/${health}`)
+            if (health === 20)
+            axios.get(`/healthCheck`)
                 .then(res => {
                     //stuff
                 })
