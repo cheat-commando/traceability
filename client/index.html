@@ -5,20 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="/styles"> -->
-    <title>Node Application with Express</title>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Explorer's RPG</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
 <body>
-    <h1>Hi, and welcome. We would love to get to know you.</h1>
-    <img src="https://media.giphy.com/media/xsX8IRMun0u9G/giphy.gif?cid=ecf05e47roo16lf0asnngzpsdhoeh7y8x0qcjykw3v8er22x&rid=giphy.gif&ct=g" alt="angry naruto rasengan">
+    <h1>Hi, and welcome. We would love to get to know you before you start your journey</h1>
+    <img src="https://media.giphy.com/media/3o7aCTXVcHJgJ4yoeI/giphy.gif?cid=ecf05e47e5s3pgq8h2zxsoriqf9sjsly7l719hx34ht1hnjl&rid=giphy.gif&ct=g" alt="explorer">
     <form>
         <ul>
-            <li>Favorite superhero<input type="text"></li>
-            <li>Favorite anime<input type="text"></li>
-            <li>Favorite color<input type="text"></li>
+            <li>Favorite class <select name="class" id="class">
+                <option value="none">(Select a class)</option>
+                <option value="math">Math</option>
+                <option value="english">English</option>
+                <option value="history">History</option>
+                <option value="science">Science</option>
+            </select>
+            </li>
+            <li>Favorite game<select name="game" id='game'>
+                <option value="none">(Select a game)</option>
+                <option value="chess">Chess</option>
+                <option value="speed">Nertz</option>
+                <option value="apples">Apples to Apples</option>
+            </select>
+            </li>
+            <li>Favorite color<select name="color" id="color">
+                <option value="none">(Select a color)</option>
+                <option value="blue">blue</option>
+                <option value="green">green</option>
+                <option value="red">red</option>
+                <option value="yellow">yellow</option>
+            </select>
+            </li>
         </ul>
         <input type="submit">
     </form>
+    <div>
+        <p>Click the button to increase the amount of HP you'll have to start your journey</p>
+        <button id="healthUp">Click to increase health</button>
+        <div>Your health is currently: <span id="health">1</span></div>
+    </div>
     <script>
         document.querySelector('form').addEventListener('submit', (event) => {
             const values = []
@@ -26,8 +52,8 @@
                 values.push(child.firstElementChild.value)
             }
             const newPersonsInterests = {
-                favHero: values[0],
-                favAnime: values[1],
+                favClass: values[0],
+                favGame: values[1],
                 favColor: values[2]
             }
             axios.post('/newInfo', newPersonsInterests)
@@ -35,6 +61,16 @@
                     //stuff
                 })
         });
+
+        document.getElementById('healthUp').addEventListener('click', (event) => {
+            let health = parseInt(document.getElementById('health').textContent)
+            health++
+            document.getElementById('health').textContent = health.toString()
+            axios.get(`/healthCheck/${health}`)
+                .then(res => {
+                    //stuff
+                })
+        })
     </script>
 </body>
 </html>
