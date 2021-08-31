@@ -45,7 +45,6 @@ function makeNewEntry(req, res) {
         } 
     }
     if (!isThereNull) {
-        peoplesInterest.push(newEntry)
         rollbar.info('User successfully entered their favorites', {favClass, favGame, favColor})
         res.status(200).send(newEntry)
     }
