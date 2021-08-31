@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/styles"> -->
+    <title>Node Application with Express</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+    <h1>Hi, and welcome. We would love to get to know you.</h1>
+    <img src="https://media.giphy.com/media/xsX8IRMun0u9G/giphy.gif?cid=ecf05e47roo16lf0asnngzpsdhoeh7y8x0qcjykw3v8er22x&rid=giphy.gif&ct=g" alt="angry naruto rasengan">
+    <form>
+        <ul>
+            <li>Favorite superhero<input type="text"></li>
+            <li>Favorite anime<input type="text"></li>
+            <li>Favorite color<input type="text"></li>
+        </ul>
+        <input type="submit">
+    </form>
+    <script>
+        document.querySelector('form').addEventListener('submit', (event) => {
+            const values = []
+            for (child of event.target.firstElementChild.children) {
+                values.push(child.firstElementChild.value)
+            }
+            const newPersonsInterests = {
+                favHero: values[0],
+                favAnime: values[1],
+                favColor: values[2]
+            }
+            axios.post('/newInfo', newPersonsInterests)
+                .then(res => {
+                    //stuff
+                })
+        });
+    </script>
+</body>
+</html>
