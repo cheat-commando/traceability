@@ -60,7 +60,19 @@
             console.log(newPersonsInterests)
             axios.post('/newInfo', newPersonsInterests)
                 .then(res => {
-                    //stuff
+                    try {
+                        document.querySelector('form').remove()
+                        let character = document.createElement('ul')
+                        for (fave in res.data) {
+                            const newStat = document.createElement(li)
+                            newStat.textContent = res.data.fave
+                            character.appendChild(newStat)
+                        }
+                        document.querySelector('body').appendChild(character)
+                    } catch {
+                        console.log('no info received')
+                    }
+                    
                 })
         });
 

@@ -33,7 +33,7 @@ function makeNewEntry(req, res) {
         rollbar.critical('User thinks math is cool')
     }
     if (favColor === 'green') {
-        rollbar.warning('User has no artistic side')
+        rollbar.warning('User has no artistic taste')
     }
     const newEntry = {
         id: currentId,favClass, favGame, favColor
