@@ -10,9 +10,6 @@ let rollbar = new Rollbar({
     captureUnhandledRejections: true
 })
 
-let currentId = 1;
-const peoplesInterest = []
-
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -36,7 +33,7 @@ function makeNewEntry(req, res) {
         rollbar.warning('User has no artistic taste')
     }
     const newEntry = {
-        id: currentId,favClass, favGame, favColor
+        favClass, favGame, favColor
     }
     let isThereNull = false
     for (piece in newEntry) {

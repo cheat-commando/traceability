@@ -61,6 +61,7 @@
                 .then(res => {
                     document.querySelector('form').remove()
                     let character = document.createElement('ul')
+                    character.id = 'character'
                     for (fave in res.data) {
                         const newStat = document.createElement('li')
                         console.log(res.data.fave)

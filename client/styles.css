@@ -14,3 +14,7 @@ div {
 button {
     margin-left: 20px;
 }
+
+#character {
+    float:none;
+}
